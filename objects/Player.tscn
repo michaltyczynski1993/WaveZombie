@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/player/survivor1_gun.png" type="Texture" id=1]
+[ext_resource path="res://sounds/275151__bird-man__gun-shot.wav" type="AudioStream" id=2]
+[ext_resource path="res://src/objects/Player.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22.9232, 21.7929 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 172.86, 62.7489 )
+collision_mask = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.88774, -4.71937 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1.41582, -5.66325 )
+frames = SubResource( 2 )
+animation = "walk"
+
+[node name="Muzzle" type="Position2D" parent="."]
+position = Vector2( 18.7768, 4.05194 )
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -13.303
+
+[node name="ReloadingTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="timeout" from="ReloadingTimer" to="." method="_on_ReloadingTimer_timeout"]

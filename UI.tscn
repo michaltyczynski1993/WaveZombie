@@ -1,0 +1,259 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/UI.gd" type="Script" id=1]
+[ext_resource path="res://assets/ReggaeOne-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://sounds/121980__stk13__jungle-ninja.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/413549__inspectorj__ambience-creepy-wind-a.wav" type="AudioStream" id=4]
+[ext_resource path="res://src/BulletsCount.gd" type="Script" id=5]
+[ext_resource path="res://assets/Bullet_for_count.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 1
+outline_color = Color( 0.0431373, 0.0392157, 0.0392157, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 35
+outline_size = 1
+outline_color = Color( 0.0196078, 0.0196078, 0.0196078, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+outline_size = 2
+outline_color = Color( 0.0196078, 0.0156863, 0.0156863, 1 )
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 1
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 25
+outline_color = Color( 0.0235294, 0.0196078, 0.0196078, 1 )
+extra_spacing_top = 1
+extra_spacing_bottom = 1
+extra_spacing_char = 2
+extra_spacing_space = 1
+font_data = ExtResource( 2 )
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/Bullet_for_count.png-b0d85d8250a3d4a9b1313fee70ac3578.stex"
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 59.0
+margin_bottom = 30.0
+text = "Alive Time: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+self_modulate = Color( 0.972549, 0.956863, 0.956863, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_top = 383.15
+margin_right = 32.0
+margin_bottom = 423.15
+custom_fonts/font = SubResource( 1 )
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreInformation" type="Label" parent="."]
+modulate = Color( 0.968627, 0.964706, 0.964706, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -243.0
+margin_top = 260.0
+margin_right = 222.0
+margin_bottom = 312.0
+custom_fonts/font = SubResource( 2 )
+text = "NEW GAME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+modulate = Color( 0.607843, 0.145098, 0.145098, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -210.262
+margin_top = 85.1333
+margin_right = 200.738
+margin_bottom = 158.133
+custom_fonts/font = SubResource( 3 )
+text = "WAVE ZOMBIE"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -105.481
+margin_top = -169.498
+margin_right = 2.51871
+margin_bottom = -130.498
+rect_scale = Vector2( 1.77145, 1.32138 )
+custom_fonts/font = SubResource( 4 )
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlInstruction" type="Label" parent="."]
+margin_left = 195.684
+margin_top = 217.755
+margin_right = 605.684
+margin_bottom = 396.755
+custom_fonts/font = SubResource( 5 )
+text = "Move - WSAD/Arrows
+Shoot - left mouse button"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -5.314
+autoplay = true
+
+[node name="GameBgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.558
+
+[node name="BulletsCount" type="HBoxContainer" parent="."]
+margin_left = 264.809
+margin_top = 2.89259
+margin_right = 800.809
+margin_bottom = 47.8926
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="TextureRect" parent="BulletsCount"]
+margin_right = 32.0
+margin_bottom = 44.0
+texture = ExtResource( 7 )
+stretch_mode = 3
+
+[node name="2" type="TextureRect" parent="BulletsCount"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="3" type="TextureRect" parent="BulletsCount"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="4" type="TextureRect" parent="BulletsCount"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="5" type="TextureRect" parent="BulletsCount"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="6" type="TextureRect" parent="BulletsCount"]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="7" type="TextureRect" parent="BulletsCount"]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="8" type="TextureRect" parent="BulletsCount"]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="9" type="TextureRect" parent="BulletsCount"]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="10" type="TextureRect" parent="BulletsCount"]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="11" type="TextureRect" parent="BulletsCount"]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="12" type="TextureRect" parent="BulletsCount"]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="13" type="TextureRect" parent="BulletsCount"]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="14" type="TextureRect" parent="BulletsCount"]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+
+[node name="15" type="TextureRect" parent="BulletsCount"]
+margin_left = 504.0
+margin_right = 536.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+stretch_mode = 3
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_Controls_pressed"]

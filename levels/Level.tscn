@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/objects/Zombie.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/objects/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/levels/Level.gd" type="Script" id=3]
+[ext_resource path="res://src/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/objects/Zombie2.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -8, 0, 0, 0, 0, 0, 800, 0, 0, 0, 0, 0, 800, 592, 0, 0, 0, 0, -8, 592, 0, 0, 0, 0, -8, 0 )
+}
+
+[node name="Level" type="Node"]
+script = ExtResource( 3 )
+Zombie = ExtResource( 1 )
+Zombie2 = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 0.0133333
+anchor_bottom = 0.0133333
+margin_left = -5.61761
+margin_top = -6.73477
+margin_right = 802.382
+margin_bottom = 593.265
+color = Color( 0.164706, 0.164706, 0.164706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 280, 472 )
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="DifficultTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
+
+[node name="ZombiePath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="ZombieSpawnLocation" type="PathFollow2D" parent="ZombiePath"]
+position = Vector2( -8, 0 )
+
+[node name="Enemy2Timer" type="Timer" parent="."]
+wait_time = 10.0
+[connection signal="bullet_out" from="Player" to="UI" method="_on_Player_bullet_out"]
+[connection signal="game_over" from="Player" to="." method="game_over"]
+[connection signal="max_bullet_numer" from="Player" to="UI" method="_on_Player_max_bullet_numer"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="DifficultTimer" to="." method="_on_DifficultTimer_timeout"]
+[connection signal="gun_reloading" from="UI" to="Player" method="_on_UI_gun_reloading"]
+[connection signal="start_game" from="UI" to="." method="new_game"]
+[connection signal="timeout" from="Enemy2Timer" to="." method="_on_Enemy2Timer_timeout"]

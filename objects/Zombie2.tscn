@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/zombie/zoimbie2_hold.png" type="Texture" id=1]
+[ext_resource path="res://src/objects/Zombie2.gd" type="Script" id=3]
+[ext_resource path="res://sounds/555425__tonsil5__zombie-pain-6.wav" type="AudioStream" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.6581, 20.8494 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 874.2, 749.736 )
+
+[node name="Zombie" type="KinematicBody2D" groups=[
+"enemies",
+]]
+position = Vector2( -52.3626, 1.58824 )
+scale = Vector2( 1.00892, 0.919596 )
+collision_layer = 0
+collision_mask = 5
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 2.3597, 0.943871 )
+scale = Vector2( 1.02883, 1.02083 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 1, 1.05119 )
+frames = SubResource( 2 )
+animation = "walk"
+
+[node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
+position = Vector2( 38.0547, 252.112 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
+visible = false
+position = Vector2( 34.9488, -336.037 )
+shape = SubResource( 3 )
+
+[node name="DieDetector" type="Area2D" parent="."]
+visible = false
+modulate = Color( 0.0431373, 0.0313726, 0.0313726, 1 )
+position = Vector2( 0.278126, -0.305152 )
+scale = Vector2( 1.16489, 1.08274 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DieDetector"]
+visible = false
+position = Vector2( 2.3597, 0.943871 )
+shape = SubResource( 1 )
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource( 4 )
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_entered" from="DieDetector" to="." method="_on_DieDetector_body_entered"]
